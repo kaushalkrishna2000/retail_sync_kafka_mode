@@ -63,7 +63,8 @@ class CustomerServe:
                     logger.info(
                         "value = {value:12}".format(key=msg.key().decode('utf-8'), value=msg.value().decode('utf-8')))
 
-                    customer_dict = dict(msg)
+                    customer_dict = msg
+                    logger.info(f"customer_dict is a {type(customer_dict)}")
                     customer_data = CustomerModel(**customer_dict)
                     logger.info(f"Customer data = {customer_data}")
 
