@@ -46,7 +46,7 @@ class CustomerServe:
         self.initialize_slot()
         self.initialize_consumer()
 
-        logger.info("Sleeping for 240 seconds to fully setup....")
+        logger.info("Sleeping for 120 seconds to fully setup....")
         time.sleep(120)
         logger.info("Inside customer serve endpoint ......")
 
@@ -55,15 +55,17 @@ class CustomerServe:
 
                 msg = self.consumer.poll(1.0)
                 logger.info(f"Message from topic = {msg}")
-                customer_dict = dict(json.loads(msg))
-                customer_data = CustomerModel(**customer_dict)
-                logger.info(f"Customer data = {customer_data}")
 
                 if msg is not None and msg.error() is None:
                     logger.info(
                         "value = {value:12}".format(key=msg.key().decode('utf-8'), value=msg.value().decode('utf-8')))
 
-                db_ops.process_customer_data(customer_data, self.id_proc)
+                    customer_dict = dict(json.loads(msg))
+                    customer_data = CustomerModel(**customer_dict)
+                    logger.info(f"Customer data = {customer_data}")
+
+                    db_ops.process_customer_data(customer_data, self.id_proc)
+
         except:
 
             logger.error(f"An error in getting message {msg.error()}")
