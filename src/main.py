@@ -18,7 +18,7 @@ def start_serve():
 process_queue = []
 
 for _ in range(4):
-    proc = Process(start_serve())
+    proc = Process(target=start_serve)
     process_queue.append(proc)
     logger.info(f"Starting process {_ + 1}...")
     proc.start()
