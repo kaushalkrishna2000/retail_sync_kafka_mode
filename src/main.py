@@ -14,5 +14,5 @@ for _ in range(4):
 
 logger.info(process_queue)
 
-for process in process_queue:
-    process.start()
+for process in range(len(process_queue)):
+    process_queue[process].start()
