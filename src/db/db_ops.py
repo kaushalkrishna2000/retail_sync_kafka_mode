@@ -30,6 +30,7 @@ def db_select_assign_slot():
     )
 
 
+'''
 def db_select_clear_slot(id_proc):
     logger.info(" Inside db clear functions ")
 
@@ -47,6 +48,7 @@ def db_status_ping():
 
 def db_mongo_proc(id_proc):
     return slot_collection.find_one({"_id": id_proc})
+'''
 
 
 def process_customer_data(customer_data: CustomerModel, id_proc):
