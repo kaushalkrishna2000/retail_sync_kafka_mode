@@ -90,7 +90,7 @@ def process_customer_data(customer_data: CustomerModel, id_proc):
 
     item_collection.bulk_write(bulk_operations)
 
-    sleep_time = tot_time #+ id_proc // 2000
+    sleep_time = tot_time / 10 #+ id_proc // 2000
     logger.info(f"Sleeping for {sleep_time}")
     time.sleep(sleep_time)
     logger.info(f"Sleeping done ....")

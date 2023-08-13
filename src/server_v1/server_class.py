@@ -57,7 +57,7 @@ class CustomerServe:
             while True:
 
                 msg = self.consumer.poll(1.0)
-                logger.info(f"Message from topic = {msg}")
+                # logger.info(f"Message from topic = {msg}")
 
                 if msg is not None and msg.error() is None:
                     logger.info(
@@ -78,5 +78,5 @@ class CustomerServe:
         except:
 
             logger.error("ERROR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-            logger.error(f"An error in getting message {msg.value()} || {msg.error()}")
+            # logger.error(f"An error in getting message {msg.value()} || {msg.error()}")
             self.consumer.close()
