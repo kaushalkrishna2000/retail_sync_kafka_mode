@@ -7,7 +7,8 @@ from db import db_ops
 from confluent_kafka import Consumer
 import logging
 
-logging.basicConfig(filename='serving.log',level=logging.DEBUG, format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
+logging.basicConfig(filename='serving.log', level=logging.DEBUG, format='%(asctime)s - %(message)s',
+                    datefmt='%d-%b-%y %H:%M:%S')
 logger = logging.getLogger('customer_serve_logger')
 
 
@@ -50,6 +51,8 @@ class CustomerServe:
         time.sleep(120)
         logger.info("Inside customer serve endpoint ......")
 
+        msg = None
+
         try:
             while True:
 
@@ -64,9 +67,10 @@ class CustomerServe:
                     customer_data = CustomerModel(**customer_dict)
                     logger.info(f"Customer data = {customer_data}")
 
+                    logger.info("Entering db ops ...")
                     db_ops.process_customer_data(customer_data, self.id_proc)
 
         except:
 
-            logger.error(f"An error in getting message {msg.error()}")
+            logger.error(f"An error in getting message {msg.value()} || {msg.error()}")
             self.consumer.close()
