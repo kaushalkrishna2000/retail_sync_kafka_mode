@@ -5,7 +5,7 @@ on:
     branches: [ "master" ]
 
 env:
-  REPO_NAME : ${{ secrets.DOCKER_USERNAME }}/retail_sync_kafka_mode
+  REPO_NAME : kaushalkrishna2000/retail_sync_kafka_mode
 
 
 jobs:
@@ -73,5 +73,5 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         push: true
-        tags: ${{env.REPO_NAME}}:latest
+        tags: ${{ env.REPO_NAME }}:latest
         #, ${{env.REPO_NAME}}:dev_${{env.TIME}}
