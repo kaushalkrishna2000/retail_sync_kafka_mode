@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+gunicorn
+pytest
+coverage
+pytest-cov
+pymongo
+pydantic
+confluent-kafka
+jproperties
