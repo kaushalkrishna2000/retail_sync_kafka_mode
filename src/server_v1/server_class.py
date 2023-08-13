@@ -63,8 +63,9 @@ class CustomerServe:
                     logger.info(
                         "value = {value:12}".format(key=msg.key().decode('utf-8'), value=msg.value().decode('utf-8')))
 
-                    customer_dict = msg
+                    customer_dict = msg.value().decode('utf-8')
                     logger.info(f"customer_dict is a {type(customer_dict)}")
+
                     customer_data = CustomerModel(**customer_dict)
                     logger.info(f"Customer data = {customer_data}")
 
@@ -73,5 +74,6 @@ class CustomerServe:
 
         except:
 
+            logger.error("ERROR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
             logger.error(f"An error in getting message {msg.value()} || {msg.error()}")
             self.consumer.close()
