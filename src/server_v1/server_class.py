@@ -7,7 +7,7 @@ from db import db_ops
 from confluent_kafka import Consumer
 import logging
 
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
+logging.basicConfig(filename='serving.log',level=logging.DEBUG, format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 logger = logging.getLogger('customer_serve_logger')
 
 
@@ -42,6 +42,9 @@ class CustomerServe:
         logger.info(f"Subscribed to topic_line_{self.id_proc} !!! ")
 
     def serve(self):
+
+        self.initialize_slot()
+        self.initialize_consumer()
 
         logger.info("Sleeping for 240 seconds to fully setup....")
         time.sleep(120)
