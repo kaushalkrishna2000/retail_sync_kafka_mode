@@ -7,7 +7,7 @@ logging.basicConfig(filename='serving.log', level=logging.DEBUG, format='%(ascti
                     datefmt='%d-%b-%y %H:%M:%S')
 logger = logging.getLogger('customer_serve_logger')
 
-logger.info("Starting to capture log")
+
 
 
 def start_serve():
@@ -15,12 +15,18 @@ def start_serve():
     CustomerServe().serve()
 
 
-process_queue = []
+if __name__=="__main__":
 
-for _ in range(4):
-    proc = Process(target=start_serve)
-    process_queue.append(proc)
-    logger.info(f"Starting process {_ + 1}...")
-    proc.start()
+    logger.info("Starting to capture log")
 
-logger.info(process_queue)
+    num_proc=4
+
+    process_queue = []
+
+    for _ in range(num_proc):
+        proc = Process(name=f"SERVING_PROCESS_{_}",target=start_serve)
+        process_queue.append(proc)
+        logger.info(f"Starting process {_ + 1}...")
+        proc.start()
+
+    logger.info(process_queue)
